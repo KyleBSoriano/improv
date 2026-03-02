@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — IMPROV</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="options-page dashboard-page">
+  <div class="dashboard-wrap">
+    <header class="dashboard-header">
+      <h1 class="dashboard-brand">IMPROV</h1>
+    </header>
+
+    <main class="dashboard-main">
+      <div class="dashboard-column dashboard-column--left">
+        <section class="dashboard-card" id="api-key-section">
+          <h2 class="dashboard-card__title">API</h2>
+          <div class="dashboard-field">
+            <label class="dashboard-field__label" for="api-key">OpenAI API key</label>
+            <input type="password" id="api-key" class="dashboard-field__input" placeholder="sk-…" autocomplete="off" />
+          </div>
+          <p class="dashboard-hint">Required for AI rewrite. Get a key at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com</a>.</p>
+        </section>
+
+        <section class="dashboard-card">
+          <h2 class="dashboard-card__title">Profile</h2>
+          <p class="dashboard-card__sub">Used in emails and replies</p>
+          <div class="dashboard-fields">
+            <div class="dashboard-field">
+              <label class="dashboard-field__label" for="profile-name">Your name (for sign-off)</label>
+              <input type="text" id="profile-name" class="dashboard-field__input" placeholder="e.g. Kyle" />
+            </div>
+            <div class="dashboard-field">
+              <label class="dashboard-field__label" for="profile-signoff">Sign-off word</label>
+              <select id="profile-signoff" class="dashboard-field__input dashboard-field__select">
+                <option value="Best">Best</option>
+                <option value="Thanks">Thanks</option>
+                <option value="Sincerely">Sincerely</option>
+                <option value="Cheers">Cheers</option>
+              </select>
+            </div>
+            <div class="dashboard-field">
+              <label class="dashboard-field__label" for="availability-link">Availability link</label>
+              <input type="url" id="availability-link" class="dashboard-field__input" placeholder="https://calendly.com/you or Cal.com link" />
+            </div>
+            <div class="dashboard-field">
+              <label class="dashboard-field__label" for="profile-bio">Short bio (context for the AI)</label>
+              <textarea id="profile-bio" class="dashboard-field__input dashboard-field__textarea" placeholder="e.g. Second-year student at UCLA, founder of Clocked. Seeking a mentor." rows="4"></textarea>
+            </div>
+          </div>
+          <p class="dashboard-hint">Bio is used as context when generating emails. Availability link is inserted when relevant.</p>
+        </section>
+      </div>
+
+      <div class="dashboard-column dashboard-column--right">
+        <section class="dashboard-card">
+          <h2 class="dashboard-card__title">Popup buttons</h2>
+          <p class="dashboard-card__sub">Buttons that appear in the IMPROV popup. Edit the label; built-in ones use a fixed prompt, custom ones use your prompt below.</p>
+          <div id="presets-list" class="custom-presets-list"></div>
+          <button type="button" id="add-preset-btn" class="btn btn--secondary">Add button</button>
+        </section>
+      </div>
+    </main>
+
+    <footer class="dashboard-footer">
+      <img src="assets/logo.png" class="dashboard-footer-logo" alt="Improv" />
+      <button type="button" id="save-btn" class="btn btn--primary">Save changes</button>
+      <span id="status" class="dashboard-status"></span>
+    </footer>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

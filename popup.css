@@ -1,0 +1,167 @@
+.popup-page {
+  width: 360px;
+  min-height: 200px;
+  margin: 0;
+  padding: 0;
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  color: #141413;
+  background: linear-gradient(180deg, #E0F4FF 0%, #FFFFFF 100%);
+  box-sizing: border-box;
+}
+
+.popup-header {
+  padding: 12px 16px 8px;
+  border-bottom: 1px solid rgba(66, 133, 244, 0.12);
+}
+
+.popup-brand {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #141413;
+}
+
+.popup-logo {
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: middle;
+  margin: 0 1px;
+}
+
+.popup-sub {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #5c5c5c;
+}
+
+.popup-clipboard-preview {
+  padding: 10px 16px;
+  font-size: 12px;
+  color: #5c5c5c;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 60px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(66, 133, 244, 0.08);
+}
+
+.popup-clipboard-preview:empty::before {
+  content: "Copy text anywhere, then open IMPROV.";
+  font-style: italic;
+}
+
+.popup-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px;
+}
+
+.popup-preset {
+  padding: 8px 14px;
+  border: 1px solid rgba(66, 133, 244, 0.25);
+  border-radius: 8px;
+  background: rgba(66, 133, 244, 0.06);
+  color: #141413;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.popup-preset:hover {
+  background: rgba(66, 133, 244, 0.12);
+  border-color: rgba(66, 133, 244, 0.4);
+}
+
+.popup-preset:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.popup-use-selection {
+  display: block;
+  width: calc(100% - 32px);
+  margin: 0 16px 12px;
+  padding: 8px 12px;
+  border: 1px solid rgba(66, 133, 244, 0.2);
+  border-radius: 8px;
+  background: transparent;
+  color: #4285F4;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.popup-use-selection:hover {
+  background: rgba(66, 133, 244, 0.06);
+}
+
+.popup-result-wrap {
+  padding: 12px 16px;
+  border-top: 1px solid rgba(66, 133, 244, 0.12);
+  background: #fff;
+  margin: 0 0 8px;
+}
+
+.popup-result-wrap--hidden {
+  display: none;
+}
+
+.popup-result-body {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 13px;
+  line-height: 1.5;
+  max-height: 200px;
+  overflow: auto;
+  margin-bottom: 10px;
+  padding: 8px 0;
+}
+
+.popup-result-body.popup-result-body--error {
+  color: #c24141;
+}
+
+.popup-copy {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #5a95f5 0%, #4285F4 50%, #3367d6 100%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.popup-copy:hover {
+  background: linear-gradient(180deg, #6ba3f7 0%, #528ef5 50%, #3367d6 100%);
+}
+
+.popup-status {
+  padding: 8px 16px;
+  font-size: 12px;
+  color: #5c5c5c;
+}
+
+.popup-status--hidden {
+  display: none;
+}
+
+.popup-status.popup-status--error {
+  color: #c24141;
+}
+
+.popup-footer {
+  padding: 8px 16px 12px;
+  border-top: 1px solid rgba(66, 133, 244, 0.08);
+}
+
+.popup-footer a {
+  font-size: 12px;
+  color: #4285F4;
+  text-decoration: none;
+}
+
+.popup-footer a:hover {
+  text-decoration: underline;
+}

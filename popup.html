@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMPROV</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="popup-page">
+  <header class="popup-header">
+    <p class="popup-brand">IMPR<img src="assets/logo.png" class="popup-logo" alt="">V</p>
+    <p class="popup-sub">Run on clipboard</p>
+  </header>
+  <div class="popup-clipboard-preview" id="clipboard-preview"></div>
+  <div class="popup-presets" id="presets">
+    <button type="button" class="popup-preset" data-prompt="email">Formal</button>
+    <button type="button" class="popup-preset" data-prompt="simplify">Simplify</button>
+    <button type="button" class="popup-preset" data-prompt="professional">Improve</button>
+    <button type="button" class="popup-preset" data-prompt="reply">Reply</button>
+  </div>
+  <button type="button" class="popup-use-selection" id="use-selection">Use selection in current tab</button>
+  <div class="popup-result-wrap popup-result-wrap--hidden" id="result-wrap">
+    <div class="popup-result-body" id="result-body"></div>
+    <button type="button" class="popup-copy" id="copy-result">Copy to clipboard</button>
+  </div>
+  <div class="popup-status popup-status--hidden" id="status"></div>
+  <footer class="popup-footer">
+    <a href="#" id="open-dashboard">Dashboard</a>
+  </footer>
+  <script src="popup.js"></script>
+</body>
+</html>
