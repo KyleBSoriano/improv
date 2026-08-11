@@ -41,7 +41,8 @@ async function saveNow() {
   try {
     const presets = collectPresets();
     await chrome.storage.local.set({
-      apiKey: apiKeyEl.value.trim(),
+      // Strip non-ASCII (zero-width spaces, smart quotes) that break the auth header.
+      apiKey: apiKeyEl.value.replace(/[^\x21-\x7E]/g, ""),
       profile: {
         name: profileNameEl.value.trim(),
         signOff: profileSignoff.value.trim(),

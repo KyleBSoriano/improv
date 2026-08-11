@@ -103,11 +103,19 @@ function parseOutput(raw) {
 const PRIMARY_MODEL = "gpt-4o";
 const FALLBACK_MODEL = "gpt-4o-mini";
 
+// HTTP header values must be ISO-8859-1. Pasted keys can carry invisible non-ASCII
+// characters (zero-width spaces, smart quotes, stray whitespace) that make fetch throw
+// "String contains non ISO-8859-1 code point." OpenAI keys are printable ASCII, so
+// drop anything else before building the Authorization header.
+function cleanApiKey(apiKey) {
+  return String(apiKey || "").replace(/[^\x21-\x7E]/g, "");
+}
+
 async function oneCall(apiKey, model, systemContent, inputText) {
   const r = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${apiKey}`,
+      "Authorization": `Bearer ${cleanApiKey(apiKey)}`,
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
