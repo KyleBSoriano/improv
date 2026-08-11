@@ -1,9 +1,15 @@
 {
   "manifest_version": 3,
   "name": "IMPROV",
-  "version": "1.0",
-  "description": "Highlight text, run AI prompt, replace inline.",
-  "web_accessible_resources": [{"resources": ["assets/logo.png"], "matches": ["<all_urls>"]}],
+  "version": "1.2.0",
+  "description": "Highlight text in any editable field or email, run an AI prompt, replace inline.",
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  },
+  "web_accessible_resources": [{"resources": ["assets/logo.png", "options.html", "options.js", "dashboard.css"], "matches": ["<all_urls>"]}],
   "permissions": [
     "storage",
     "activeTab",
@@ -15,17 +21,23 @@
   "background": {
     "service_worker": "background.js"
   },
-  "action": {
-    "default_popup": "popup.html",
-    "default_title": "IMPROV — Run on clipboard"
-  },
   "commands": {
-    "_execute_action": {
+    "toggle-panel": {
       "suggested_key": {
-        "default": "Ctrl+Shift+I",
-        "mac": "Command+Shift+I"
+        "default": "Ctrl+Shift+U",
+        "mac": "Command+Shift+U"
       },
-      "description": "Open IMPROV (run on clipboard)"
+      "description": "Open the IMPROV panel"
+    }
+  },
+  "action": {
+    "default_popup": "options.html",
+    "default_title": "IMPROV — Dashboard",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "32": "assets/icons/icon-32.png",
+      "48": "assets/icons/icon-48.png",
+      "128": "assets/icons/icon-128.png"
     }
   },
   "content_scripts": [
@@ -35,6 +47,5 @@
       "css": ["styles.css"],
       "run_at": "document_end"
     }
-  ],
-  "options_page": "options.html"
+  ]
 }

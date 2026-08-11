@@ -1,0 +1,371 @@
+/* IMPROV Dashboard styles — loaded ONLY by options.html (toolbar popup and the
+   in-page modal iframe). This file is NEVER injected into host pages, so the
+   html/body/.dash-* rules below can never affect any website's layout or aspect
+   ratio. Keep page-level (html/body/*) selectors out of styles.css for that
+   reason — styles.css ships to every site via content_scripts. */
+
+/* ========================================================================
+   IMPROV Dashboard (Chrome toolbar popup)
+   ======================================================================== */
+
+/* Scoped to the dashboard document only — styles.css is also injected into
+   every page as content CSS, so a bare `html` selector here would force
+   ALL websites to 480px wide (mobile layout + white screen bug). */
+html:has(> body.dashboard), body.dashboard {
+  width: 480px;
+  margin: 0;
+  padding: 0;
+}
+body.dashboard {
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #141413;
+  background:
+    radial-gradient(600px 280px at 50% -120px, rgba(66,133,244,0.12), transparent 65%),
+    linear-gradient(180deg, #FAF9F5 0%, #FFFFFF 60%);
+  -webkit-font-smoothing: antialiased;
+}
+body.dashboard * { box-sizing: border-box; }
+
+.dash-wrap {
+  padding: 18px 18px 22px;
+}
+
+/* Header */
+.dash-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+.dash-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.dash-brand__text {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #141413;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+.dash-brand__o {
+  width: 0.85em;
+  height: 0.85em;
+  vertical-align: middle;
+  margin: 0 0.02em;
+}
+.dash-brand__sub {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8a8a88;
+}
+.dash-tag {
+  margin: 4px 0 16px;
+  font-size: 12.5px;
+  color: #5c5c5c;
+}
+
+/* Status (Saving / Saved / error) */
+.dash-status {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8a8a88;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 16px;
+  transition: opacity 0.12s ease;
+}
+.dash-status--saving { color: #5c5c5c; }
+.dash-status--saving::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(66,133,244,0.25);
+  border-top-color: #4285F4;
+  display: inline-block;
+  animation: dash-spin 0.8s linear infinite;
+}
+.dash-status--saved {
+  color: #0a7a4a;
+}
+.dash-status--saved::before {
+  content: "✓";
+  font-weight: 700;
+}
+.dash-status--error { color: #c24141; }
+@keyframes dash-spin { to { transform: rotate(360deg); } }
+
+/* Main */
+.dash-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Card */
+.dash-card {
+  background: #fff;
+  border: 1px solid rgba(20,20,19,0.08);
+  border-radius: 12px;
+  padding: 16px 16px 14px;
+  box-shadow: 0 1px 2px rgba(20,20,19,0.04), 0 6px 18px -14px rgba(66,133,244,0.20);
+}
+.dash-card__head {
+  margin-bottom: 12px;
+}
+.dash-card__title {
+  margin: 0 0 2px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #4285F4;
+}
+.dash-card__sub {
+  margin: 0;
+  font-size: 12.5px;
+  color: #5c5c5c;
+  line-height: 1.45;
+}
+.dash-card--collapsed { opacity: 0.6; }
+.dash-card--collapsed:hover { opacity: 1; }
+
+/* Field */
+.dash-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 12px;
+}
+.dash-field:first-child,
+.dash-card__head + .dash-field { margin-top: 0; }
+.dash-field__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #141413;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.dash-field__optional {
+  font-weight: 500;
+  font-size: 10px;
+  color: #8a8a88;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.dash-field__hint {
+  margin: 3px 0 0;
+  font-size: 11.5px;
+  color: #6b6b68;
+  line-height: 1.45;
+}
+.dash-field__hint a { color: #4285F4; text-decoration: none; }
+.dash-field__hint a:hover { text-decoration: underline; }
+
+/* Toggle row (dashboard) */
+.dash-toggle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  user-select: none;
+}
+.dash-toggle__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.dash-toggle__title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #141413;
+}
+.dash-toggle__desc {
+  font-size: 11.5px;
+  color: #6b6b68;
+  line-height: 1.45;
+}
+.dash-toggle__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+.dash-toggle__track {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  border-radius: 999px;
+  background: #cfd6e4;
+  transition: background 0.18s ease;
+  flex-shrink: 0;
+}
+.dash-toggle__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  transition: left 0.18s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+}
+.dash-toggle__input:checked + .dash-toggle__track {
+  background: #4285F4;
+}
+.dash-toggle__input:checked + .dash-toggle__track .dash-toggle__thumb {
+  left: 18px;
+}
+.dash-toggle__input:focus-visible + .dash-toggle__track {
+  outline: 2px solid #4285F4;
+  outline-offset: 2px;
+}
+
+/* Input */
+.dash-input {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid rgba(20,20,19,0.13);
+  border-radius: 8px;
+  background: #fff;
+  color: #141413;
+  font: 13.5px/1.5 inherit;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+.dash-input::placeholder { color: #a8a8a4; }
+.dash-input:hover { border-color: rgba(20,20,19,0.22); }
+.dash-input:focus {
+  outline: none;
+  border-color: #4285F4;
+  box-shadow: 0 0 0 3px rgba(66,133,244,0.14);
+}
+.dash-textarea {
+  min-height: 70px;
+  resize: vertical;
+  line-height: 1.55;
+}
+.dash-textarea--lg { min-height: 96px; }
+.dash-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235c5c5c' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+  padding-right: 32px;
+}
+
+/* Grid inside a card */
+.dash-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 12px;
+  margin-top: 0;
+}
+.dash-grid .dash-field { margin-top: 0; }
+
+/* Presets */
+.dash-presets {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.dash-preset {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 11px;
+  background: #fafafa;
+  border: 1px solid rgba(20,20,19,0.08);
+  border-radius: 9px;
+}
+.dash-preset:hover { border-color: rgba(20,20,19,0.18); }
+.dash-preset--builtin {
+  background: rgba(66,133,244,0.04);
+  border-color: rgba(66,133,244,0.20);
+}
+.dash-preset__top {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.dash-preset__name {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+}
+.dash-preset__tag {
+  flex-shrink: 0;
+  padding: 3px 9px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #4285F4;
+  background: rgba(66,133,244,0.10);
+  border-radius: 999px;
+}
+.dash-preset__remove {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  font-size: 11.5px;
+  font-weight: 500;
+  font-family: inherit;
+  background: transparent;
+  color: #8a4141;
+  border: 1px solid rgba(194,65,65,0.25);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.dash-preset__remove:hover {
+  background: rgba(194,65,65,0.08);
+  color: #c24141;
+}
+.dash-preset__note {
+  margin: 0;
+  font-size: 11.5px;
+  color: #4285F4;
+  font-weight: 500;
+}
+.dash-preset__prompt {
+  min-height: 60px;
+  font-size: 13px;
+}
+
+/* Buttons */
+.dash-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 16px;
+  border: none;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+.dash-btn--ghost {
+  width: 100%;
+  background: transparent;
+  color: #4285F4;
+  border: 1px dashed rgba(66,133,244,0.40);
+}
+.dash-btn--ghost:hover {
+  background: rgba(66,133,244,0.06);
+  border-color: rgba(66,133,244,0.65);
+}

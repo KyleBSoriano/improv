@@ -3,71 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard — IMPROV</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>IMPROV — Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
 </head>
-<body class="options-page dashboard-page">
-  <div class="dashboard-wrap">
-    <header class="dashboard-header">
-      <h1 class="dashboard-brand">IMPROV</h1>
+<body class="dashboard">
+  <div class="dash-wrap">
+
+    <header class="dash-header">
+      <div class="dash-brand">
+        <span class="dash-brand__text">IMPR<img src="assets/logo.png" class="dash-brand__o" alt=""/>V</span>
+        <span class="dash-brand__sub">Dashboard</span>
+      </div>
+      <span id="status" class="dash-status"></span>
     </header>
+    <p class="dash-tag">Everything here influences the prompts. Changes save automatically.</p>
 
-    <main class="dashboard-main">
-      <div class="dashboard-column dashboard-column--left">
-        <section class="dashboard-card" id="api-key-section">
-          <h2 class="dashboard-card__title">API</h2>
-          <div class="dashboard-field">
-            <label class="dashboard-field__label" for="api-key">OpenAI API key</label>
-            <input type="password" id="api-key" class="dashboard-field__input" placeholder="sk-…" autocomplete="off" />
+    <main class="dash-main">
+
+      <section class="dash-card">
+        <div class="dash-card__head">
+          <h2 class="dash-card__title">Context</h2>
+          <p class="dash-card__sub">The AI uses this as background on you in every rewrite and reply.</p>
+        </div>
+        <div class="dash-field">
+          <label class="dash-field__label" for="profile-bio">About you</label>
+          <textarea id="profile-bio" class="dash-input dash-textarea dash-textarea--lg" placeholder="e.g. Second-year student at UCLA, founder of Clocked. Building a time-management product for students. Looking for mentors and early customers." rows="5"></textarea>
+        </div>
+      </section>
+
+      <section class="dash-card">
+        <div class="dash-card__head">
+          <h2 class="dash-card__title">Identity</h2>
+          <p class="dash-card__sub">Used in the sign-off of every email and reply.</p>
+        </div>
+        <div class="dash-grid">
+          <div class="dash-field">
+            <label class="dash-field__label" for="profile-name">Your name</label>
+            <input type="text" id="profile-name" class="dash-input" placeholder="Kyle" />
           </div>
-          <p class="dashboard-hint">Required for AI rewrite. Get a key at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com</a>.</p>
-        </section>
-
-        <section class="dashboard-card">
-          <h2 class="dashboard-card__title">Profile</h2>
-          <p class="dashboard-card__sub">Used in emails and replies</p>
-          <div class="dashboard-fields">
-            <div class="dashboard-field">
-              <label class="dashboard-field__label" for="profile-name">Your name (for sign-off)</label>
-              <input type="text" id="profile-name" class="dashboard-field__input" placeholder="e.g. Kyle" />
-            </div>
-            <div class="dashboard-field">
-              <label class="dashboard-field__label" for="profile-signoff">Sign-off word</label>
-              <select id="profile-signoff" class="dashboard-field__input dashboard-field__select">
-                <option value="Best">Best</option>
-                <option value="Thanks">Thanks</option>
-                <option value="Sincerely">Sincerely</option>
-                <option value="Cheers">Cheers</option>
-              </select>
-            </div>
-            <div class="dashboard-field">
-              <label class="dashboard-field__label" for="availability-link">Availability link</label>
-              <input type="url" id="availability-link" class="dashboard-field__input" placeholder="https://calendly.com/you or Cal.com link" />
-            </div>
-            <div class="dashboard-field">
-              <label class="dashboard-field__label" for="profile-bio">Short bio (context for the AI)</label>
-              <textarea id="profile-bio" class="dashboard-field__input dashboard-field__textarea" placeholder="e.g. Second-year student at UCLA, founder of Clocked. Seeking a mentor." rows="4"></textarea>
-            </div>
+          <div class="dash-field">
+            <label class="dash-field__label" for="profile-signoff">Sign-off</label>
+            <select id="profile-signoff" class="dash-input dash-select">
+              <option value="Best">Best</option>
+              <option value="Thanks">Thanks</option>
+              <option value="Sincerely">Sincerely</option>
+              <option value="Cheers">Cheers</option>
+            </select>
           </div>
-          <p class="dashboard-hint">Bio is used as context when generating emails. Availability link is inserted when relevant.</p>
-        </section>
-      </div>
+        </div>
+        <div class="dash-field">
+          <label class="dash-field__label" for="availability-link">Availability link <span class="dash-field__optional">optional</span></label>
+          <input type="url" id="availability-link" class="dash-input" placeholder="https://calendly.com/you" />
+        </div>
+      </section>
 
-      <div class="dashboard-column dashboard-column--right">
-        <section class="dashboard-card">
-          <h2 class="dashboard-card__title">Popup buttons</h2>
-          <p class="dashboard-card__sub">Buttons that appear in the IMPROV popup. Edit the label; built-in ones use a fixed prompt, custom ones use your prompt below.</p>
-          <div id="presets-list" class="custom-presets-list"></div>
-          <button type="button" id="add-preset-btn" class="btn btn--secondary">Add button</button>
-        </section>
-      </div>
+      <section class="dash-card">
+        <div class="dash-card__head">
+          <h2 class="dash-card__title">Behavior</h2>
+          <p class="dash-card__sub">Controls how IMPROV appears while you work in Gmail.</p>
+        </div>
+        <label class="dash-toggle" for="show-on-highlight">
+          <span class="dash-toggle__text">
+            <span class="dash-toggle__title">Show on highlight</span>
+            <span class="dash-toggle__desc">Pop up the IMPROV panel automatically when you select text.</span>
+          </span>
+          <input type="checkbox" id="show-on-highlight" class="dash-toggle__input" />
+          <span class="dash-toggle__track"><span class="dash-toggle__thumb"></span></span>
+        </label>
+      </section>
+
+      <section class="dash-card">
+        <div class="dash-card__head">
+          <h2 class="dash-card__title">Custom buttons</h2>
+          <p class="dash-card__sub">Your own preset prompts. Context and identity layer on top automatically.</p>
+        </div>
+        <div id="presets-list" class="dash-presets"></div>
+        <button type="button" id="add-preset-btn" class="dash-btn dash-btn--ghost">+ Add button</button>
+      </section>
+
+      <section class="dash-card" id="api-key-section">
+        <div class="dash-card__head">
+          <h2 class="dash-card__title">API key</h2>
+          <p class="dash-card__sub">Stored locally. Only sent to OpenAI.</p>
+        </div>
+        <div class="dash-field">
+          <input type="password" id="api-key" class="dash-input" placeholder="sk-…" autocomplete="off" />
+          <p class="dash-field__hint">Get one at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>.</p>
+        </div>
+      </section>
+
     </main>
 
-    <footer class="dashboard-footer">
-      <img src="assets/logo.png" class="dashboard-footer-logo" alt="Improv" />
-      <button type="button" id="save-btn" class="btn btn--primary">Save changes</button>
-      <span id="status" class="dashboard-status"></span>
-    </footer>
   </div>
   <script src="options.js"></script>
 </body>
