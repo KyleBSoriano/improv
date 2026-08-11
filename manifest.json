@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "IMPROV",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Highlight text in any editable field or email, run an AI prompt, replace inline.",
   "icons": {
     "16": "assets/icons/icon-16.png",
@@ -9,14 +9,14 @@
     "48": "assets/icons/icon-48.png",
     "128": "assets/icons/icon-128.png"
   },
-  "web_accessible_resources": [{"resources": ["assets/logo.png", "options.html", "options.js", "dashboard.css"], "matches": ["<all_urls>"]}],
+  "web_accessible_resources": [{"resources": ["assets/logo.png", "options.html", "options.js", "dashboard.css"], "matches": ["https://mail.google.com/*"]}],
   "permissions": [
     "storage",
     "activeTab",
     "scripting"
   ],
   "host_permissions": [
-    "<all_urls>"
+    "https://mail.google.com/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -42,7 +42,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["https://mail.google.com/*"],
       "js": ["content.js"],
       "css": ["styles.css"],
       "run_at": "document_end"
